@@ -1,0 +1,148 @@
+{
+  "845025101": {
+    "reason_to_call": "This 503-employee group ran over $2.37M in medical charges through Health Plan of Nevada in just the second half of 2024 alone, signaling a sizable spend base worth reviewing ahead of their next renewal.",
+    "renewal_summary": "The filing data projects a renewal date of 2026-10-02, though the days-until-renewal figure (20) does not align with that date, so timing should be treated as a low-confidence estimate pending verification. The recommended outreach window (2026-06-04 to 2026-08-03) is not currently active per the data provided.",
+    "coverage_gaps": [],
+    "key_facts": [
+      "503 employees (500-999 size bucket), single Form 5500 plan bundling health, dental, vision, and life/STD/LTD coverage.",
+      "Medical/Rx coverage through Health Plan of Nevada (HMO/PPO), 666 persons covered, $2,372,828 in total charges paid for the 2024-06-01 to 2024-12-31 period.",
+      "Dental through Guardian Life, 425 persons covered, $41,196 in charges paid (2024-10-01 to 2024-12-31).",
+      "Vision through EyeMed (Fidelity Security Life), 636 persons covered, $14,883 in charges paid.",
+      "Life, STD, and LTD through Symetra, 485 persons covered, $18,046 in charges paid.",
+      "Broker commissions reported: $71,185 (Health Plan of Nevada), $21,626 + $549 fees (Symetra), $4,120 (Guardian), $0 (EyeMed)."
+    ],
+    "talking_points": [
+      "Ask what's driving the gap between covered lives across carriers (666 medical, 636 vision, 485 life/STD/LTD, 425 dental) - is enrollment aligned or are some lines optional/voluntary?",
+      "The filing does not flag a stop-loss indicator for the medical plan - worth confirming whether stop-loss coverage exists and how it's structured given the group's size.",
+      "With four separate carriers spanning medical, dental, vision, and life/STD/LTD, explore whether consolidating administration or re-marketing could simplify renewal and improve terms.",
+      "Given the meaningful medical spend reported for just a partial policy period, ask how the full plan year trended and whether they've seen recent rate actions from Health Plan of Nevada.",
+      "Confirm the actual renewal date directly, since the data's day-count and projected date don't align - use this as a natural opening to get their real timeline."
+    ],
+    "cold_call_opener": "Hi, this is [Broker] - I was reviewing your company's benefits filings and noticed you're running a fairly substantial medical plan through Health Plan of Nevada, over $2.3 million in charges paid in just half a year, alongside dental, vision, and life/disability coverage through separate carriers. I'd love to learn how your renewal conversations are shaping up and see if there's an opportunity to help streamline things.",
+    "urgency_score": 4,
+    "urgency_label": "Medium"
+  },
+  "590933147": {
+    "reason_to_call": "Gencor Industries' benefits program renews November 1, 2026 (~50 days out) and the ideal outreach window already closed in early September, so a call now is needed to get in front of the renewal before it's locked in.",
+    "renewal_summary": "Filings show two medical carriers (Cigna Health and Life, Medical Associates) on an October 1\u2013September 30 policy year and ancillary coverage through Renaissance Life and Health on a November 1\u2013October 31 year, with the projected renewal date landing on 2026-11-01. This estimate is projected forward from the 2023-2024 filed policy periods, so treat the exact date as an approximation rather than a confirmed renewal date.",
+    "coverage_gaps": [],
+    "key_facts": [
+      "298 total employees (size bucket 250-499), one Form 5500 plan covering three carrier lines",
+      "Cigna Health and Life covers 180 lives (medical) with $884,207 in total charges paid and $47,816 in broker commissions for the 2023-10-01 to 2024-09-30 period",
+      "Medical Associates covers 132 lives (medical) with $1,188,995 in total charges paid and $12,445 in broker commissions for the same period",
+      "Renaissance Life and Health covers all 298 lives for dental, vision, life, STD and LTD, with $463,069 in charges paid and $22,928 in commissions for its 2023-11-01 to 2024-10-31 policy year",
+      "No premium estimate is currently available for this account",
+      "Latest filing was submitted 2026-01-26, reflecting the most recent plan-year data on record"
+    ],
+    "talking_points": [
+      "Ask why medical coverage is split across two carriers (Cigna at 180 lives, Medical Associates at 132 lives) - is this a dual-option plan, a legacy arrangement, or a transition in progress?",
+      "Explore whether the ancillary bundle (dental, vision, life, STD/LTD) with Renaissance, covering the full 298 headcount, has been remarketed recently or could be consolidated for better pricing/service.",
+      "With Medical Associates showing the highest total charges paid (~$1.19M) relative to its smaller covered population, ask about recent claims experience or utilization trends driving cost.",
+      "Since renewal is projected for November 1 and the typical outreach window has passed, ask directly about the current renewal timeline and whether a marketing/bid process is already underway.",
+      "Confirm current premium levels and stop-loss/Rx arrangements, since no data on these was available in the filings, to identify any blind spots in the current program."
+    ],
+    "cold_call_opener": "Hi, this is [Broker] - I work with employers in Orlando on their group benefits strategy, and I noticed Gencor Industries' filings show medical coverage split between Cigna and Medical Associates alongside a Renaissance ancillary package covering all 298 employees. With your renewal cycle pointing toward early November, I wanted to see if now's a good time to compare notes on how this year's renewal is shaping up.",
+    "urgency_score": 9,
+    "urgency_label": "Critical"
+  },
+  "910742853": {
+    "reason_to_call": "The employer's only reported benefit on file is a life insurance policy through Life Insurance Company of North America, while most similarly-sized peers also carry medical, dental, vision, and disability coverage \u2014 a strong opening to ask about their broader benefits program ahead of renewal.",
+    "renewal_summary": "The current filing covers a life insurance plan running 2024-01-01 to 2024-12-31, with the most recent Form 5500 filed 2025-04-24. A renewal date of 2027-01-01 is projected, and the account currently falls within the recommended outreach window (Sep\u2013Nov 2026), though no premium estimate is available due to missing premium data in the filing.",
+    "coverage_gaps": [
+      "No Medical/Health coverage reported in this filing, vs. 61.4% of similarly-sized peers offering it",
+      "No Dental coverage reported, vs. 76.6% of peers offering it",
+      "No Vision coverage reported, vs. 86.6% of peers offering it",
+      "No Short-Term Disability reported, vs. 65.6% of peers offering it",
+      "No Long-Term Disability reported, vs. 82.4% of peers offering it"
+    ],
+    "key_facts": [
+      "Sponsor: Wilkins Kaiser Olsen Inc., based in Carson, WA, with 399 covered employees (250-499 size bucket)",
+      "Only one plan is on file, providing Life Insurance through Life Insurance Company of North America",
+      "Policy period on file: 2024-01-01 to 2024-12-31; latest 5500 filed 2025-04-24",
+      "Total charges paid on the life policy: $36,794, with broker fees of $787 and $0 in broker commission reported",
+      "Projected renewal date: 2027-01-01; account is currently in the recommended outreach window",
+      "No premium estimate could be generated from the available filing data"
+    ],
+    "talking_points": [
+      "Ask whether medical, dental, vision, and disability benefits are placed elsewhere (e.g., a different carrier or self-funded arrangement) and simply not reflected in this filing, or whether these are genuine gaps.",
+      "Discuss how their current life insurance-only structure compares to peer companies of similar size, most of which layer in dental, vision, and disability.",
+      "Explore interest in adding Short- and Long-Term Disability given a majority of peers (65.6% and 82.4% respectively) already offer these.",
+      "Review the current life policy's fee structure ($787 broker fee, $0 commission reported) and confirm whether that reflects the full compensation arrangement.",
+      "Confirm headcount trends (currently 399 lives) to right-size any expanded benefits proposal."
+    ],
+    "cold_call_opener": "Hi, this is [Broker Name] \u2014 I was reviewing Wilkins Kaiser Olsen's federal benefits filings and noticed you currently have life insurance coverage through Life Insurance Company of North America for your 399 employees, but I didn't see medical, dental, or vision listed. I wanted to check in and see how those benefits are currently being handled ahead of your next renewal.",
+    "urgency_score": 6,
+    "urgency_label": "Medium"
+  },
+  "472689230": {
+    "reason_to_call": "ICI Homes is running a complex multi-carrier medical setup (BCBS Florida, Florida Health Care Plans, and Health Options) for its 359 employees with a January 1, 2027 renewal now inside the ideal outreach window, making this a timely moment to review carrier strategy and cost trend.",
+    "renewal_summary": "The current plan year on file ran 2024-01-01 to 2024-12-31 with a reported annual premium of about $3.0M; the renewal date is projected as 2027-01-01, roughly 111 days out, and the filing indicates the account is currently inside the recommended outreach window. The estimated current premium range ($3.08M-$3.93M) is a trended projection off an 8% assumed rate, not a confirmed figure, so it should be validated with the client.",
+    "coverage_gaps": [
+      "No Short-Term Disability benefit is reported for ICI Homes, while 65.6% of similarly-sized peers offer this coverage - notable since they do carry Long-Term Disability through United of Omaha."
+    ],
+    "key_facts": [
+      "359 employees (250-499 size bucket), headquartered in Daytona Beach, FL.",
+      "Medical coverage is split across three carriers: BCBS Florida (67 covered, $935,071 premium), Florida Health Care Plans (227 covered, $1,333,502 premium), and Health Options Inc. (74 covered, $732,334 premium).",
+      "Dental is dual-sourced through MetLife (384 covered) and Safeguard Health Plans (160 covered); vision is through Humana (209 covered).",
+      "Life and Long-Term Disability benefits are placed with United of Omaha across several lines covering between 76 and 231 lives.",
+      "Florida Health Care Plans generated a notably large broker fee line item ($136,395) alongside $26,670 in commissions - worth understanding what services that fee covers.",
+      "No Short-Term Disability benefit indicator appears anywhere in the filing despite 65.6% peer adoption of STD."
+    ],
+    "talking_points": [
+      "Ask why medical is split across three carriers (BCBS, FHCP, Health Options) - is this driven by regional network needs, employee choice, or legacy plan design, and would consolidation simplify administration or improve pricing leverage?",
+      "Raise the missing Short-Term Disability benefit and gauge interest in adding it, especially since they already offer LTD through United of Omaha.",
+      "Discuss the dual dental carrier setup (MetLife and Safeguard) - review whether both are still needed or if consolidating could reduce administrative overhead.",
+      "Clarify the ~$136,395 broker fee reported on the Florida Health Care Plans line and confirm what services justify that cost heading into renewal.",
+      "Use the estimated premium range ($3.08M-$3.93M, trended at 8%) as a conversation starter to validate actual renewal expectations against market trend."
+    ],
+    "cold_call_opener": "Hi, this is [Name] - I've been looking at ICI Homes Residential Holdings' benefits setup and noticed you're running medical through three separate carriers, BCBS Florida, Florida Health Care Plans, and Health Options, for your roughly 359 employees, with a renewal coming up January 1, 2027. I also noticed you don't currently show Short-Term Disability coverage, which most similarly-sized employers carry. Do you have a few minutes to talk through how you're approaching this renewal?",
+    "urgency_score": 7,
+    "urgency_label": "High"
+  },
+  "840608431": {
+    "reason_to_call": "DMC Global's renewal is projected for 2027-01-01 (about 111 days out) and current data shows they're actively inside the ideal outreach window, with a fragmented multi-carrier setup (6 carriers across medical, life/disability, and voluntary lines) that's ripe for a consolidation and benchmarking conversation.",
+    "renewal_summary": "DMC Global runs a single ERISA welfare plan, most recently filed 2025-06-03, with a projected renewal date of 2027-01-01 (roughly 111 days away). No premium estimate is available in this data, so any cost discussion should be based on the 2024 plan-year filings rather than a current premium figure.",
+    "coverage_gaps": [],
+    "key_facts": [
+      "1,372 employees (size bucket 1000-4999), based in Broomfield, CO, filing a single Form 5500 welfare plan.",
+      "Medical/dental/vision/Rx is primarily placed with Blue Cross of California, covering 1,443 lives on an HMO/PPO basis.",
+      "Kaiser Foundation Health Plan (17 lives) and Cigna (1 life) appear as small supplemental medical carriers alongside Blue Cross of California.",
+      "Life, STD, and LTD coverage moved mid-2024 from Anthem Life Insurance (Jan-Mar 2024, 1,539 lives) to Standard Insurance Company (Apr-Dec 2024, 1,372 lives).",
+      "ReliaStar Life Insurance provides indemnity/other coverage to 187 employees, distinct from the core medical and life/disability lines.",
+      "Reported broker commissions totaled roughly $373,700 across all six carriers for the 2024 plan year, with $290,794 tied to the Blue Cross of California medical plan alone."
+    ],
+    "talking_points": [
+      "What drove the switch from Anthem Life to Standard Insurance for life/STD/LTD mid-way through 2024, and how has the transition gone?",
+      "Are the small Kaiser (17 lives) and Cigna (1 life) enrollments legacy carve-outs (e.g., from an acquisition or relocation) or intentional multi-carrier strategy worth consolidating?",
+      "With renewal projected for 2027-01-01, is the broker/consultant relationship locked in, or is there room to benchmark the current Blue Cross of California program given the sizable commission spend?",
+      "How is the ReliaStar voluntary/indemnity benefit for 187 employees being positioned and utilized - is there interest in expanding or re-evaluating that offering?",
+      "Since all lines appear fully insured with no stop-loss reported, is there any interest in exploring self-funded or level-funded alternatives as headcount scales?"
+    ],
+    "cold_call_opener": "Hi, this is [Broker] - I was reviewing DMC Global's benefits filings and noticed you moved your life, STD, and LTD coverage from Anthem to Standard Insurance partway through last year, and that you're running medical across Blue Cross of California, Kaiser, and Cigna simultaneously. With your renewal coming up around January 2027, I'd love to see if there's an opportunity to simplify that carrier mix and make sure you're getting competitive value.",
+    "urgency_score": 7,
+    "urgency_label": "High"
+  },
+  "593619944": {
+    "reason_to_call": "Mullinax Ford is running a fragmented program - two health carriers (Cigna and BCBS of Alabama) on mismatched plan-year cycles, plus a Cigna arrangement with $150,141 in broker fees but $0 commission - a structure worth reviewing well ahead of the projected renewal.",
+    "renewal_summary": "Filing data shows plan years ending 5/31 for Cigna, Guardian, and Colonial Life, but a separate 12/31 plan year for BCBS of Alabama. The projected renewal date is 2027-05-30 (about 260 days out), and the formal outreach window (2027-01-30 to 2027-03-31) hasn't opened yet, so confidence in the exact renewal timing is moderate given the mixed plan-year data.",
+    "coverage_gaps": [],
+    "key_facts": [
+      "972 employees (500-999 size bucket), one Form 5500 filing referencing 4 carriers.",
+      "Health coverage is split: Cigna PPO/indemnity with Rx covering 448 lives (policy 6/1/24-5/31/25) and BCBS of Alabama covering 184 lives (policy 1/1/24-12/31/24).",
+      "Guardian provides dental, vision, life, STD, and LTD for 1,023 covered lives, with a broker commission of $104,402.",
+      "Colonial Life voluntary benefits are reported across 10 separate policy lines (~550 total covered lives), each with its own small commission split.",
+      "The Cigna health block shows $0 broker commission but $150,141 in broker fees - a different compensation model than Guardian's commission-based structure.",
+      "Reported annual premium (BCBS block) was $1,397,813 as of 5/31/2025; the trended estimate for current annual premium ranges $1,388,703-$1,774,454 using an 8% trend rate - this is an estimate, not a confirmed figure."
+    ],
+    "talking_points": [
+      "Why is health coverage split between Cigna and BCBS of Alabama on different plan-year cycles - is this a transition, multiple locations, or a dual offering?",
+      "How is the Cigna fee-only structure ($150K in fees, $0 commission) performing compared to a traditional commission-based arrangement, and is it still the right fit?",
+      "With 1,023 lives on the Guardian ancillary bundle (dental/vision/life/STD/LTD), is now a good time to benchmark those rates and commission levels?",
+      "Could consolidating the ~10 separate Colonial Life voluntary benefit lines simplify administration and reporting?",
+      "What is the actual current premium and renewal date, since our estimate ($1.39M-$1.77M) is projected from 2025 filing data?"
+    ],
+    "cold_call_opener": "Hi, this is [Broker] calling - I was looking at Mullinax Ford's benefits filings and noticed your roughly 972 employees are covered through both Cigna and BCBS of Alabama for health, plus Guardian and Colonial Life for ancillary and voluntary benefits. I wanted to check in on how that structure is working as you head toward your next renewal.",
+    "urgency_score": 4,
+    "urgency_label": "Medium"
+  }
+}

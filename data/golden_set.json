@@ -1,0 +1,840 @@
+{
+  "version": 1,
+  "model": "claude-opus-5",
+  "description": "Golden set for backend.generator.generate_report(). Each case's 'filing' has the exact shape produced by backend.fetcher.get_company_filing(). 'expected' is scored automatically by scripts/run_evals.py; 'reference_output' is a human-readable example of an acceptable report, not matched verbatim.",
+  "cases": [
+    {
+      "id": "case-01-imminent-renewal-dental-gap",
+      "description": "Mid-size manufacturer, renewal in 21 days (already past the ideal 60-120 day outreach window), missing dental and drug coverage that most size-matched peers carry. Should read as urgent despite in_outreach_window being false.",
+      "filing": {
+        "company_key": "471234567",
+        "sponsor_name": "Cascade Ridge Manufacturing Inc.",
+        "city": "Spokane",
+        "state": "WA",
+        "headcount": 750,
+        "size_bucket": "500-999",
+        "num_plans": 2,
+        "latest_filing_date": "2025-03-10",
+        "carriers": [
+          "Anthem Blue Cross",
+          "Prudential Insurance Company Of America"
+        ],
+        "coverage_lines": [
+          {
+            "ACK_ID": "20250115000001NAL001",
+            "company_key": "471234567",
+            "INS_CARRIER_NAME": "Anthem Blue Cross",
+            "INS_CARRIER_NAIC_CODE": "12345",
+            "INS_PRSN_COVERED_EOY_CNT": 720,
+            "INS_POLICY_FROM_DATE": "2024-11-01",
+            "INS_POLICY_TO_DATE": "2025-10-31",
+            "INS_BROKER_COMM_TOT_AMT": 45000,
+            "INS_BROKER_FEES_TOT_AMT": 5000,
+            "WLFR_BNFT_HEALTH_IND": 1,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 1,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 2850000,
+            "WLFR_TOT_EARNED_PREM_AMT": 2900000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 2750000
+          },
+          {
+            "ACK_ID": "20250115000001NAL002",
+            "company_key": "471234567",
+            "INS_CARRIER_NAME": "Prudential Insurance Company Of America",
+            "INS_CARRIER_NAIC_CODE": "67890",
+            "INS_PRSN_COVERED_EOY_CNT": 750,
+            "INS_POLICY_FROM_DATE": "2024-11-01",
+            "INS_POLICY_TO_DATE": "2025-10-31",
+            "INS_BROKER_COMM_TOT_AMT": 4200,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 1,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 95000,
+            "WLFR_TOT_EARNED_PREM_AMT": 98000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 91000
+          }
+        ],
+        "renewal": {
+          "renewal_date": "2025-11-01",
+          "days_until_renewal": 21,
+          "outreach_window_start": "2025-07-04",
+          "outreach_window_end": "2025-09-02",
+          "in_outreach_window": false
+        },
+        "premium_estimate": {
+          "reported_annual_premium": 2998000,
+          "reported_as_of": "2025-10-31",
+          "estimated_current_annual_premium_low": 2698200,
+          "estimated_current_annual_premium_high": 3447700,
+          "trend_rate_used": 0.08
+        },
+        "coverage_gaps": [
+          {
+            "benefit": "Dental",
+            "peer_adoption_pct": 68.9
+          },
+          {
+            "benefit": "Prescription Drug",
+            "peer_adoption_pct": 61.2
+          }
+        ]
+      },
+      "expected": {
+        "must_mention_all": [
+          "dental",
+          "anthem"
+        ],
+        "forbidden_terms": [
+          "cigna",
+          "unitedhealthcare",
+          "kaiser",
+          "guardian",
+          "sun life"
+        ],
+        "urgency_label_in": [
+          "High",
+          "Critical"
+        ],
+        "urgency_score_min": 7,
+        "min_items": {
+          "key_facts": 3,
+          "talking_points": 2
+        },
+        "reference_output": {
+          "reason_to_call": "Their medical plan renews in 21 days and they're carrying no dental or drug coverage that most peers their size have.",
+          "renewal_summary": "Cascade Ridge's Anthem Blue Cross medical plan runs 11/1/2024-10/31/2025, so the next renewal effective date is 11/1/2025 (21 days out). That's already past the typical 60-120 day outreach window, so this is a late but still workable renewal conversation.",
+          "coverage_gaps": [
+            "No dental coverage on file, even though 68.9% of similarly-sized peers (500-999 employees) carry it.",
+            "No prescription drug coverage on file, versus 61.2% peer adoption."
+          ],
+          "key_facts": [
+            "750 employees, Spokane, WA; 500-999 peer size bucket.",
+            "Medical carrier: Anthem Blue Cross, ~$2.9M earned premium reported for the current plan year.",
+            "Life insurance carrier: Prudential, ~$98K earned premium.",
+            "Renewal effective date: 11/1/2025 - 21 days away.",
+            "No dental or prescription drug lines filed."
+          ],
+          "talking_points": [
+            "With 21 days to renewal, what's the timeline for their broker to finalize next year's plan?",
+            "Ask whether dental/drug benefits are carved out to a plan not reflected in this filing, or genuinely absent.",
+            "Estimated current premium of roughly $2.7M-$3.4M - worth benchmarking against the market given the late timing."
+          ],
+          "cold_call_opener": "Hi, I noticed Cascade Ridge's medical plan with Anthem renews November 1st - with three weeks left, I wanted to see if you're locked into next year's terms yet, especially since your filings don't show dental or prescription coverage that most manufacturers your size carry.",
+          "urgency_score": 9,
+          "urgency_label": "Critical"
+        }
+      }
+    },
+    {
+      "id": "case-02-far-renewal-full-coverage",
+      "description": "Large logistics company, renewal 310 days out, full core benefit lineup with no gaps. Should read as low urgency / nurture, not a fabricated crisis.",
+      "filing": {
+        "company_key": "930987654",
+        "sponsor_name": "Blue Harbor Logistics LLC",
+        "city": "Tacoma",
+        "state": "WA",
+        "headcount": 5200,
+        "size_bucket": "5000+",
+        "num_plans": 3,
+        "latest_filing_date": "2025-06-20",
+        "carriers": [
+          "Guardian Life Insurance",
+          "MetLife",
+          "UnitedHealthcare"
+        ],
+        "coverage_lines": [
+          {
+            "ACK_ID": "20250201000002NAL001",
+            "company_key": "930987654",
+            "INS_CARRIER_NAME": "UnitedHealthcare",
+            "INS_CARRIER_NAIC_CODE": "11111",
+            "INS_PRSN_COVERED_EOY_CNT": 5000,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 180000,
+            "INS_BROKER_FEES_TOT_AMT": 20000,
+            "WLFR_BNFT_HEALTH_IND": 1,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 1,
+            "WLFR_BNFT_STOP_LOSS_IND": 1,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 1,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 18200000,
+            "WLFR_TOT_EARNED_PREM_AMT": 18500000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 17600000
+          },
+          {
+            "ACK_ID": "20250201000002NAL002",
+            "company_key": "930987654",
+            "INS_CARRIER_NAME": "MetLife",
+            "INS_CARRIER_NAIC_CODE": "22222",
+            "INS_PRSN_COVERED_EOY_CNT": 5200,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 9000,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 1,
+            "WLFR_BNFT_TEMP_DISAB_IND": 1,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 1,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 620000,
+            "WLFR_TOT_EARNED_PREM_AMT": 640000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 590000
+          },
+          {
+            "ACK_ID": "20250201000002NAL003",
+            "company_key": "930987654",
+            "INS_CARRIER_NAME": "Guardian Life Insurance",
+            "INS_CARRIER_NAIC_CODE": "33333",
+            "INS_PRSN_COVERED_EOY_CNT": 4800,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 15000,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 1,
+            "WLFR_BNFT_VISION_IND": 1,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 660000,
+            "WLFR_TOT_EARNED_PREM_AMT": 680000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 615000
+          }
+        ],
+        "renewal": {
+          "renewal_date": "2026-01-01",
+          "days_until_renewal": 310,
+          "outreach_window_start": "2025-09-03",
+          "outreach_window_end": "2025-11-02",
+          "in_outreach_window": false
+        },
+        "premium_estimate": {
+          "reported_annual_premium": 19820000,
+          "reported_as_of": "2025-12-31",
+          "estimated_current_annual_premium_low": 17800000,
+          "estimated_current_annual_premium_high": 22800000,
+          "trend_rate_used": 0.08
+        },
+        "coverage_gaps": []
+      },
+      "expected": {
+        "must_mention_any": [
+          "unitedhealthcare",
+          "guardian",
+          "metlife"
+        ],
+        "forbidden_terms": [
+          "anthem",
+          "cigna",
+          "aetna",
+          "kaiser",
+          "prudential",
+          "sun life"
+        ],
+        "urgency_label_in": [
+          "Low",
+          "Medium"
+        ],
+        "urgency_score_max": 5,
+        "max_items": {
+          "coverage_gaps": 0
+        },
+        "min_items": {
+          "key_facts": 3,
+          "talking_points": 2
+        },
+        "reference_output": {
+          "reason_to_call": "Their full benefits program is already in place with no coverage gaps, so this is a relationship-building check-in well ahead of their January 1st renewal.",
+          "renewal_summary": "Blue Harbor's medical, dental/vision, and life/disability lines all run on a calendar-year plan through 12/31/2025, renewing 1/1/2026 - about 310 days out, well before the typical outreach window opens.",
+          "coverage_gaps": [],
+          "key_facts": [
+            "5,200 employees; 5,000+ peer size bucket.",
+            "Medical: UnitedHealthcare, ~$18.5M earned premium, includes drug and stop-loss coverage.",
+            "Life/STD/LTD: MetLife, ~$640K earned premium.",
+            "Dental/vision: Guardian Life Insurance, ~$680K earned premium.",
+            "Next renewal: 1/1/2026 (310 days out) - no urgency yet."
+          ],
+          "talking_points": [
+            "Ask how satisfied they are with UnitedHealthcare's claims experience and stop-loss attachment point this year.",
+            "Use the lead time to introduce yourself before the RFP season starts.",
+            "Confirm whether their current broker of record relationship is up for review at this renewal."
+          ],
+          "cold_call_opener": "Hi, I work with mid-to-large employers on their group benefits, and I noticed Blue Harbor's plans don't renew until January - I wanted to introduce myself early, well before your broker review season kicks off.",
+          "urgency_score": 3,
+          "urgency_label": "Low"
+        }
+      }
+    },
+    {
+      "id": "case-03-in-window-vision-stoploss-gap",
+      "description": "Mid-size hospitality group, renewal in 75 days - squarely inside the 60-120 day outreach window - missing vision and stop-loss coverage that a majority of peers carry.",
+      "filing": {
+        "company_key": "550112233",
+        "sponsor_name": "Sunridge Hospitality Group LLC",
+        "city": "Orlando",
+        "state": "FL",
+        "headcount": 620,
+        "size_bucket": "500-999",
+        "num_plans": 2,
+        "latest_filing_date": "2025-04-02",
+        "carriers": [
+          "Cigna",
+          "Sun Life Financial"
+        ],
+        "coverage_lines": [
+          {
+            "ACK_ID": "20250301000003NAL001",
+            "company_key": "550112233",
+            "INS_CARRIER_NAME": "Cigna",
+            "INS_CARRIER_NAIC_CODE": "44444",
+            "INS_PRSN_COVERED_EOY_CNT": 590,
+            "INS_POLICY_FROM_DATE": "2025-03-01",
+            "INS_POLICY_TO_DATE": "2026-02-28",
+            "INS_BROKER_COMM_TOT_AMT": 62000,
+            "INS_BROKER_FEES_TOT_AMT": 8000,
+            "WLFR_BNFT_HEALTH_IND": 1,
+            "WLFR_BNFT_DENTAL_IND": 1,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 1,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 1,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 3950000,
+            "WLFR_TOT_EARNED_PREM_AMT": 4020000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 3800000
+          },
+          {
+            "ACK_ID": "20250301000003NAL002",
+            "company_key": "550112233",
+            "INS_CARRIER_NAME": "Sun Life Financial",
+            "INS_CARRIER_NAIC_CODE": "55555",
+            "INS_PRSN_COVERED_EOY_CNT": 620,
+            "INS_POLICY_FROM_DATE": "2025-03-01",
+            "INS_POLICY_TO_DATE": "2026-02-28",
+            "INS_BROKER_COMM_TOT_AMT": 6500,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 1,
+            "WLFR_BNFT_TEMP_DISAB_IND": 1,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 1,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 78000,
+            "WLFR_TOT_EARNED_PREM_AMT": 81000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 74000
+          }
+        ],
+        "renewal": {
+          "renewal_date": "2026-03-01",
+          "days_until_renewal": 75,
+          "outreach_window_start": "2025-11-01",
+          "outreach_window_end": "2025-12-31",
+          "in_outreach_window": true
+        },
+        "premium_estimate": {
+          "reported_annual_premium": 4101000,
+          "reported_as_of": "2026-02-28",
+          "estimated_current_annual_premium_low": 3800000,
+          "estimated_current_annual_premium_high": 4700000,
+          "trend_rate_used": 0.08
+        },
+        "coverage_gaps": [
+          {
+            "benefit": "Vision",
+            "peer_adoption_pct": 58.4
+          },
+          {
+            "benefit": "Stop-Loss",
+            "peer_adoption_pct": 52.7
+          }
+        ]
+      },
+      "expected": {
+        "must_mention_all": [
+          "vision"
+        ],
+        "must_mention_any": [
+          "cigna",
+          "sun life"
+        ],
+        "forbidden_terms": [
+          "unitedhealthcare",
+          "anthem",
+          "metlife",
+          "guardian",
+          "aetna"
+        ],
+        "urgency_label_in": [
+          "Medium",
+          "High"
+        ],
+        "urgency_score_min": 4,
+        "urgency_score_max": 8,
+        "min_items": {
+          "key_facts": 3,
+          "talking_points": 2
+        },
+        "reference_output": {
+          "reason_to_call": "Sunridge's health plan renews in 75 days - right in the prime outreach window - and they're missing vision and stop-loss coverage that most peers their size carry.",
+          "renewal_summary": "Cigna medical/dental runs 3/1/2025-2/28/2026, renewing 3/1/2026 (75 days out), squarely inside the typical 60-120 day broker outreach window.",
+          "coverage_gaps": [
+            "No vision coverage on file, versus 58.4% peer adoption for similarly-sized employers.",
+            "No stop-loss coverage on file, versus 52.7% peer adoption - worth flagging if their medical plan is self-funded."
+          ],
+          "key_facts": [
+            "620 employees, Orlando, FL; 500-999 peer size bucket.",
+            "Medical/dental/drug: Cigna, ~$4.0M earned premium.",
+            "Life/STD/LTD: Sun Life Financial, ~$81K earned premium.",
+            "Renewal effective date: 3/1/2026 - 75 days away, inside the outreach window now.",
+            "No vision or stop-loss lines filed."
+          ],
+          "talking_points": [
+            "Ask if vision is offered through a voluntary/employee-paid plan not reflected in this filing.",
+            "If the medical plan is self-funded, stop-loss absence is worth a direct question about risk exposure.",
+            "Estimated current premium of $3.8M-$4.7M gives a benchmarking anchor for the renewal conversation."
+          ],
+          "cold_call_opener": "Hi, I saw Sunridge's Cigna plan renews March 1st, and with about 75 days to go I wanted to check whether vision and stop-loss coverage - which most hospitality groups your size carry - are part of the picture for next year.",
+          "urgency_score": 6,
+          "urgency_label": "Medium"
+        }
+      }
+    },
+    {
+      "id": "case-04-recent-renewal-no-gaps",
+      "description": "Small credit union that just renewed, next renewal 353 days out, and its missing STD/LTD/stop-loss lines are below the 50% peer adoption threshold for its size bucket - so they should NOT be reported as gaps. Tests that Claude doesn't invent gaps beyond what coverage_gaps already computed.",
+      "filing": {
+        "company_key": "381445566",
+        "sponsor_name": "Northfield Credit Union",
+        "city": "Rochester",
+        "state": "NY",
+        "headcount": 145,
+        "size_bucket": "100-249",
+        "num_plans": 1,
+        "latest_filing_date": "2025-01-20",
+        "carriers": [
+          "Aetna",
+          "Delta Dental",
+          "Prudential Insurance Company Of America",
+          "VSP Vision Care"
+        ],
+        "coverage_lines": [
+          {
+            "ACK_ID": "20250110000004NAL001",
+            "company_key": "381445566",
+            "INS_CARRIER_NAME": "Aetna",
+            "INS_CARRIER_NAIC_CODE": "66666",
+            "INS_PRSN_COVERED_EOY_CNT": 140,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 21000,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 1,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 1,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 1,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 830000,
+            "WLFR_TOT_EARNED_PREM_AMT": 850000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 795000
+          },
+          {
+            "ACK_ID": "20250110000004NAL002",
+            "company_key": "381445566",
+            "INS_CARRIER_NAME": "Delta Dental",
+            "INS_CARRIER_NAIC_CODE": "77777",
+            "INS_PRSN_COVERED_EOY_CNT": 140,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 1800,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 1,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 68000,
+            "WLFR_TOT_EARNED_PREM_AMT": 70000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 64000
+          },
+          {
+            "ACK_ID": "20250110000004NAL003",
+            "company_key": "381445566",
+            "INS_CARRIER_NAME": "VSP Vision Care",
+            "INS_CARRIER_NAIC_CODE": "88888",
+            "INS_PRSN_COVERED_EOY_CNT": 130,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 600,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 1,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 12000,
+            "WLFR_TOT_EARNED_PREM_AMT": 12500,
+            "WLFR_TOT_CHARGES_PAID_AMT": 11000
+          },
+          {
+            "ACK_ID": "20250110000004NAL004",
+            "company_key": "381445566",
+            "INS_CARRIER_NAME": "Prudential Insurance Company Of America",
+            "INS_CARRIER_NAIC_CODE": "67890",
+            "INS_PRSN_COVERED_EOY_CNT": 145,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 900,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 1,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 14000,
+            "WLFR_TOT_EARNED_PREM_AMT": 14500,
+            "WLFR_TOT_CHARGES_PAID_AMT": 13000
+          }
+        ],
+        "renewal": {
+          "renewal_date": "2026-01-01",
+          "days_until_renewal": 353,
+          "outreach_window_start": "2025-09-03",
+          "outreach_window_end": "2025-11-02",
+          "in_outreach_window": false
+        },
+        "premium_estimate": {
+          "reported_annual_premium": 947000,
+          "reported_as_of": "2025-12-31",
+          "estimated_current_annual_premium_low": 890000,
+          "estimated_current_annual_premium_high": 1130000,
+          "trend_rate_used": 0.08
+        },
+        "coverage_gaps": []
+      },
+      "expected": {
+        "must_mention_any": [
+          "aetna",
+          "delta dental",
+          "vsp"
+        ],
+        "forbidden_terms": [
+          "cigna",
+          "unitedhealthcare",
+          "anthem",
+          "metlife",
+          "guardian",
+          "kaiser",
+          "sun life"
+        ],
+        "urgency_label_in": [
+          "Low",
+          "Medium"
+        ],
+        "urgency_score_max": 5,
+        "max_items": {
+          "coverage_gaps": 0
+        },
+        "min_items": {
+          "key_facts": 3,
+          "talking_points": 2
+        },
+        "reference_output": {
+          "reason_to_call": "Northfield just locked in a full benefits renewal for the year, so this is an early relationship-building call rather than an urgent gap conversation.",
+          "renewal_summary": "Northfield's Aetna medical, Delta Dental, VSP vision, and Prudential life plans all run calendar-year 1/1/2025-12/31/2025, renewing 1/1/2026 - 353 days out, far ahead of the typical outreach window.",
+          "coverage_gaps": [],
+          "key_facts": [
+            "145 employees, Rochester, NY; 100-249 peer size bucket.",
+            "Medical: Aetna, ~$850K earned premium.",
+            "Dental: Delta Dental (~$70K); Vision: VSP (~$12.5K).",
+            "Life: Prudential, ~$14.5K earned premium.",
+            "Next renewal: 1/1/2026 (353 days out) - no gaps flagged against peers this size."
+          ],
+          "talking_points": [
+            "Ask how the current renewal process went and who the broker of record is.",
+            "With no flagged gaps, focus on plan design and cost trends rather than missing coverage.",
+            "Good candidate for a check-in call now, with a real renewal conversation closer to Q3."
+          ],
+          "cold_call_opener": "Hi, I know Northfield just renewed benefits for the year, so no rush - I wanted to introduce myself early since your medical, dental, vision, and life lineup all runs through Aetna, Delta Dental, VSP, and Prudential.",
+          "urgency_score": 2,
+          "urgency_label": "Low"
+        }
+      }
+    },
+    {
+      "id": "case-05-large-employer-ltd-stoploss-gap",
+      "description": "Very large food manufacturer, renewal in 45 days (past the outreach window, urgent), high premium at stake, missing long-term disability and stop-loss coverage that most peers this size carry.",
+      "filing": {
+        "company_key": "861778899",
+        "sponsor_name": "Redwood Peak Foods Inc.",
+        "city": "Sacramento",
+        "state": "CA",
+        "headcount": 8400,
+        "size_bucket": "5000+",
+        "num_plans": 4,
+        "latest_filing_date": "2025-08-11",
+        "carriers": [
+          "Anthem Blue Cross",
+          "Delta Dental",
+          "Kaiser Permanente",
+          "MetLife"
+        ],
+        "coverage_lines": [
+          {
+            "ACK_ID": "20250401000005NAL001",
+            "company_key": "861778899",
+            "INS_CARRIER_NAME": "Kaiser Permanente",
+            "INS_CARRIER_NAIC_CODE": "99001",
+            "INS_PRSN_COVERED_EOY_CNT": 3600,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 210000,
+            "INS_BROKER_FEES_TOT_AMT": 15000,
+            "WLFR_BNFT_HEALTH_IND": 1,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 1,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 5600000,
+            "WLFR_TOT_EARNED_PREM_AMT": 5700000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 5400000
+          },
+          {
+            "ACK_ID": "20250401000005NAL002",
+            "company_key": "861778899",
+            "INS_CARRIER_NAME": "Anthem Blue Cross",
+            "INS_CARRIER_NAIC_CODE": "12345",
+            "INS_PRSN_COVERED_EOY_CNT": 4800,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 260000,
+            "INS_BROKER_FEES_TOT_AMT": 18000,
+            "WLFR_BNFT_HEALTH_IND": 1,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 1,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 1,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 7300000,
+            "WLFR_TOT_EARNED_PREM_AMT": 7450000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 7000000
+          },
+          {
+            "ACK_ID": "20250401000005NAL003",
+            "company_key": "861778899",
+            "INS_CARRIER_NAME": "Delta Dental",
+            "INS_CARRIER_NAIC_CODE": "77777",
+            "INS_PRSN_COVERED_EOY_CNT": 8000,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 12000,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 1,
+            "WLFR_BNFT_VISION_IND": 1,
+            "WLFR_BNFT_LIFE_INSUR_IND": 0,
+            "WLFR_BNFT_TEMP_DISAB_IND": 0,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 780000,
+            "WLFR_TOT_EARNED_PREM_AMT": 800000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 730000
+          },
+          {
+            "ACK_ID": "20250401000005NAL004",
+            "company_key": "861778899",
+            "INS_CARRIER_NAME": "MetLife",
+            "INS_CARRIER_NAIC_CODE": "22222",
+            "INS_PRSN_COVERED_EOY_CNT": 8400,
+            "INS_POLICY_FROM_DATE": "2025-01-01",
+            "INS_POLICY_TO_DATE": "2025-12-31",
+            "INS_BROKER_COMM_TOT_AMT": 14000,
+            "INS_BROKER_FEES_TOT_AMT": 0,
+            "WLFR_BNFT_HEALTH_IND": 0,
+            "WLFR_BNFT_DENTAL_IND": 0,
+            "WLFR_BNFT_VISION_IND": 0,
+            "WLFR_BNFT_LIFE_INSUR_IND": 1,
+            "WLFR_BNFT_TEMP_DISAB_IND": 1,
+            "WLFR_BNFT_LONG_TERM_DISAB_IND": 0,
+            "WLFR_BNFT_DRUG_IND": 0,
+            "WLFR_BNFT_STOP_LOSS_IND": 0,
+            "WLFR_BNFT_HMO_IND": 0,
+            "WLFR_BNFT_PPO_IND": 0,
+            "WLFR_BNFT_INDEMNITY_IND": 0,
+            "WLFR_BNFT_OTHER_IND": 0,
+            "WLFR_PREMIUM_RCVD_AMT": 640000,
+            "WLFR_TOT_EARNED_PREM_AMT": 660000,
+            "WLFR_TOT_CHARGES_PAID_AMT": 605000
+          }
+        ],
+        "renewal": {
+          "renewal_date": "2026-01-01",
+          "days_until_renewal": 45,
+          "outreach_window_start": "2025-09-03",
+          "outreach_window_end": "2025-11-02",
+          "in_outreach_window": false
+        },
+        "premium_estimate": {
+          "reported_annual_premium": 14610000,
+          "reported_as_of": "2025-12-31",
+          "estimated_current_annual_premium_low": 13500000,
+          "estimated_current_annual_premium_high": 16800000,
+          "trend_rate_used": 0.08
+        },
+        "coverage_gaps": [
+          {
+            "benefit": "Long-Term Disability",
+            "peer_adoption_pct": 71.3
+          },
+          {
+            "benefit": "Stop-Loss",
+            "peer_adoption_pct": 66.8
+          }
+        ]
+      },
+      "expected": {
+        "must_mention_all": [
+          "disability",
+          "stop-loss"
+        ],
+        "forbidden_terms": [
+          "cigna",
+          "aetna",
+          "unitedhealthcare",
+          "guardian",
+          "prudential",
+          "sun life",
+          "vsp"
+        ],
+        "urgency_label_in": [
+          "Critical",
+          "High"
+        ],
+        "urgency_score_min": 7,
+        "min_items": {
+          "key_facts": 3,
+          "talking_points": 2
+        },
+        "reference_output": {
+          "reason_to_call": "With roughly $14-17M in annual premium at stake and renewal only 45 days away, Redwood Peak is missing long-term disability and stop-loss coverage that most peers their size carry.",
+          "renewal_summary": "Redwood Peak's medical (Kaiser + Anthem), dental/vision (Delta Dental), and life/STD (MetLife) plans all run calendar-year through 12/31/2025, renewing 1/1/2026 - 45 days out and already past the ideal 60-120 day outreach window.",
+          "coverage_gaps": [
+            "No long-term disability coverage on file, versus 71.3% peer adoption among 5,000+ employee companies.",
+            "No stop-loss coverage on file, versus 66.8% peer adoption - notable given the size of their self-insured-scale medical spend."
+          ],
+          "key_facts": [
+            "8,400 employees, Sacramento, CA; 5,000+ peer size bucket.",
+            "Medical split across Kaiser Permanente (~$5.7M) and Anthem Blue Cross (~$7.45M) earned premium.",
+            "Dental/vision: Delta Dental, ~$800K earned premium.",
+            "Life/STD: MetLife, ~$660K earned premium; no LTD line filed.",
+            "Renewal effective date: 1/1/2026 - 45 days away."
+          ],
+          "talking_points": [
+            "At this premium scale, ask directly whether LTD is offered through a voluntary plan not captured here.",
+            "No stop-loss line is worth flagging if any portion of the medical plan is self-funded.",
+            "45 days is tight - ask who's currently marketing the renewal and whether the RFP has gone out."
+          ],
+          "cold_call_opener": "Hi, I'm reaching out about Redwood Peak's benefits renewal on January 1st - with about 45 days left and roughly $14-17M in premium in play, I wanted to flag that your filings don't show long-term disability or stop-loss coverage that most food manufacturers your size carry.",
+          "urgency_score": 8,
+          "urgency_label": "Critical"
+        }
+      }
+    }
+  ]
+}
