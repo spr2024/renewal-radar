@@ -3,19 +3,21 @@ import KpiRow from "./components/KpiRow";
 import ProspectTable from "./components/ProspectTable";
 import CompanyModal from "./components/CompanyModal";
 import PerksModal from "./components/PerksModal";
-import { fetchCompanies } from "./api";
+import { fetchCompanies, fetchStatusOptions, updateCompanyStatus } from "./api";
 
 export default function App() {
   const [companies, setCompanies] = useState([]);
+  const [statusOptions, setStatusOptions] = useState([]);
   const [status, setStatus] = useState("loading"); // loading | ready | error
   const [error, setError] = useState(null);
   const [selectedKey, setSelectedKey] = useState(null);
   const [perksKey, setPerksKey] = useState(null);
 
   useEffect(() => {
-    fetchCompanies()
-      .then((data) => {
-        setCompanies(data);
+    Promise.all([fetchCompanies(), fetchStatusOptions()])
+      .then(([companyData, options]) => {
+        setCompanies(companyData);
+        setStatusOptions(options);
         setStatus("ready");
       })
       .catch((err) => {
@@ -23,6 +25,20 @@ export default function App() {
         setStatus("error");
       });
   }, []);
+
+  async function handleStatusChange(companyKey, newStatus) {
+    const previous = companies;
+    setCompanies((cs) =>
+      cs.map((c) => (c.company_key === companyKey ? { ...c, status: newStatus } : c))
+    );
+    try {
+      const updated = await updateCompanyStatus(companyKey, newStatus);
+      setCompanies((cs) => cs.map((c) => (c.company_key === companyKey ? updated : c)));
+    } catch (err) {
+      setCompanies(previous);
+      alert(`Couldn't update status: ${err.message}`);
+    }
+  }
 
   const selected = companies.find((c) => c.company_key === selectedKey) || null;
   const perksTarget = companies.find((c) => c.company_key === perksKey) || null;
@@ -57,7 +73,13 @@ export default function App() {
             <span>Click a column header to sort &middot; click a row for details</span>
           </div>
 
-          <ProspectTable companies={companies} onSelect={setSelectedKey} onSendPerk={setPerksKey} />
+          <ProspectTable
+            companies={companies}
+            statusOptions={statusOptions}
+            onSelect={setSelectedKey}
+            onSendPerk={setPerksKey}
+            onStatusChange={handleStatusChange}
+          />
 
           <footer>
             <strong>Data notes:</strong> Renewal dates are projected from each company's most

@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
-import { formatMoney, isHot } from "../format";
+import { formatMoney, formatTimestamp, isHot, statusClass } from "../format";
 
 const COLUMNS = [
   { key: "sponsor_name", label: "Company" },
+  { key: "status", label: "Status" },
+  { key: "status_updated_at", label: "Last Updated" },
   { key: "state", label: "Location" },
   { key: "phone", label: "Phone" },
   { key: "headcount", label: "Headcount" },
@@ -17,6 +19,8 @@ function toRow(company) {
   return {
     company_key: company.company_key,
     sponsor_name: company.sponsor_name,
+    status: company.status,
+    status_updated_at: company.status_updated_at || "",
     state: company.state,
     city: company.city,
     phone: company.phone || "—",
@@ -30,7 +34,7 @@ function toRow(company) {
   };
 }
 
-export default function ProspectTable({ companies, onSelect, onSendPerk }) {
+export default function ProspectTable({ companies, statusOptions, onSelect, onSendPerk, onStatusChange }) {
   const [sortKey, setSortKey] = useState("days_until_renewal");
   const [sortDir, setSortDir] = useState(1);
 
@@ -80,6 +84,20 @@ export default function ProspectTable({ companies, onSelect, onSendPerk }) {
               onClick={() => onSelect(r.company_key)}
             >
               <td className="company wrap">{r.sponsor_name}</td>
+              <td onClick={(e) => e.stopPropagation()}>
+                <select
+                  className={`status-select ${statusClass(r.status)}`}
+                  value={r.status}
+                  onChange={(e) => onStatusChange(r.company_key, e.target.value)}
+                >
+                  {statusOptions.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td className="mono loc">{formatTimestamp(r.status_updated_at)}</td>
               <td className="loc">
                 {r.city}, {r.state}
               </td>

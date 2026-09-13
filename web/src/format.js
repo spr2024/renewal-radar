@@ -8,3 +8,21 @@ export function formatMoney(estimate) {
 export function isHot(daysUntilRenewal) {
   return daysUntilRenewal <= 100;
 }
+
+export function formatTimestamp(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + " " +
+    d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+}
+
+export function statusClass(status) {
+  const map = {
+    "Not Contacted": "status-not-contacted",
+    Contacted: "status-contacted",
+    "Meeting Scheduled": "status-meeting",
+    Won: "status-won",
+    Lost: "status-lost",
+  };
+  return map[status] || "status-not-contacted";
+}

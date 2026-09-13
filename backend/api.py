@@ -10,7 +10,9 @@ Run from the project root:
 """
 
 import json
+import os
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from pathlib import Path
 
 import anthropic
@@ -22,10 +24,38 @@ from backend import generator
 
 ROOT = Path(__file__).resolve().parent.parent
 DEMO_COMPANIES_PATH = ROOT / "data" / "demo_companies.json"
+STATUS_PATH = ROOT / "data" / "company_status.json"
+
+DEFAULT_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]
+_extra_origins = [o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "").split(",") if o.strip()]
+ALLOWED_ORIGINS = DEFAULT_ORIGINS + _extra_origins
+
+STATUS_OPTIONS = ["Not Contacted", "Contacted", "Meeting Scheduled", "Won", "Lost"]
+DEFAULT_STATUS = STATUS_OPTIONS[0]
 
 _companies: list[dict] = []
 _companies_by_key: dict[str, dict] = {}
 _report_cache: dict[str, dict] = {}
+_statuses: dict[str, dict] = {}
+
+
+def _load_statuses() -> dict[str, dict]:
+    if STATUS_PATH.exists():
+        return json.loads(STATUS_PATH.read_text(encoding="utf-8"))
+    return {}
+
+
+def _save_statuses() -> None:
+    STATUS_PATH.write_text(json.dumps(_statuses, indent=2), encoding="utf-8")
+
+
+def _apply_status(company: dict) -> dict:
+    entry = _statuses.get(company["company_key"], {})
+    return {
+        **company,
+        "status": entry.get("status", DEFAULT_STATUS),
+        "status_updated_at": entry.get("updated_at"),
+    }
 
 
 @asynccontextmanager
@@ -34,6 +64,8 @@ async def lifespan(app: FastAPI):
     _companies[:] = data
     _companies_by_key.clear()
     _companies_by_key.update({c["company_key"]: c for c in data})
+    _statuses.clear()
+    _statuses.update(_load_statuses())
     yield
 
 
@@ -41,7 +73,7 @@ app = FastAPI(title="Renewal Radar API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -52,9 +84,18 @@ class ReportRequest(BaseModel):
     force: bool = False
 
 
+class StatusUpdateRequest(BaseModel):
+    status: str
+
+
+@app.get("/api/status-options")
+def get_status_options():
+    return STATUS_OPTIONS
+
+
 @app.get("/api/companies")
 def list_companies():
-    return _companies
+    return [_apply_status(c) for c in _companies]
 
 
 @app.get("/api/companies/{company_key}")
@@ -62,7 +103,24 @@ def get_company(company_key: str):
     company = _companies_by_key.get(company_key)
     if company is None:
         raise HTTPException(status_code=404, detail=f"No company with key {company_key!r}")
-    return company
+    return _apply_status(company)
+
+
+@app.patch("/api/companies/{company_key}/status")
+def update_status(company_key: str, req: StatusUpdateRequest):
+    if company_key not in _companies_by_key:
+        raise HTTPException(status_code=404, detail=f"No company with key {company_key!r}")
+    if req.status not in STATUS_OPTIONS:
+        raise HTTPException(
+            status_code=422, detail=f"status must be one of {STATUS_OPTIONS}, got {req.status!r}"
+        )
+
+    _statuses[company_key] = {
+        "status": req.status,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    }
+    _save_statuses()
+    return _apply_status(_companies_by_key[company_key])
 
 
 @app.post("/api/companies/{company_key}/report")

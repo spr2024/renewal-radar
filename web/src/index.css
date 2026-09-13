@@ -17,6 +17,8 @@
   --urgency-high: #b9720a;
   --urgency-critical: #9c4614;
   --backdrop: rgba(28, 35, 31, 0.5);
+  --status-info: #2e5c8a;
+  --status-success: #2e7d46;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +39,8 @@
     --urgency-high: #e2a24a;
     --urgency-critical: #e08a52;
     --backdrop: rgba(6, 10, 9, 0.65);
+    --status-info: #7fb0e0;
+    --status-success: #6fcb8f;
   }
 }
 :root[data-theme="dark"] {
@@ -56,6 +60,8 @@
   --urgency-high: #e2a24a;
   --urgency-critical: #e08a52;
   --backdrop: rgba(6, 10, 9, 0.65);
+  --status-info: #7fb0e0;
+  --status-success: #6fcb8f;
 }
 
 * {
@@ -278,6 +284,22 @@ th.no-sort:hover {
   background: var(--warn-bg-strong);
   color: var(--warn);
 }
+
+.status-select {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--surface-2);
+  background: var(--surface-2);
+  cursor: pointer;
+}
+.status-not-contacted { color: var(--text-muted); }
+.status-contacted { color: var(--accent-strong); border-color: var(--accent); }
+.status-meeting { color: var(--status-info); border-color: var(--status-info); }
+.status-won { color: var(--status-success); border-color: var(--status-success); }
+.status-lost { color: var(--text-muted); border-color: var(--text-muted); text-decoration: line-through; }
 
 /* Modal */
 .modal-backdrop {
