@@ -3,7 +3,7 @@ import KpiRow from "./components/KpiRow";
 import ProspectTable from "./components/ProspectTable";
 import CompanyModal from "./components/CompanyModal";
 import PerksModal from "./components/PerksModal";
-import { fetchCompanies, fetchStatusOptions, updateCompanyStatus } from "./api";
+import { fetchCompanies, fetchStatusOptions, updateCompanyStatus, updateCompanyNotes } from "./api";
 
 export default function App() {
   const [companies, setCompanies] = useState([]);
@@ -37,6 +37,15 @@ export default function App() {
     } catch (err) {
       setCompanies(previous);
       alert(`Couldn't update status: ${err.message}`);
+    }
+  }
+
+  async function handleNotesChange(companyKey, newNotes) {
+    try {
+      const updated = await updateCompanyNotes(companyKey, newNotes);
+      setCompanies((cs) => cs.map((c) => (c.company_key === companyKey ? updated : c)));
+    } catch (err) {
+      alert(`Couldn't save note: ${err.message}`);
     }
   }
 
@@ -79,6 +88,7 @@ export default function App() {
             onSelect={setSelectedKey}
             onSendPerk={setPerksKey}
             onStatusChange={handleStatusChange}
+            onNotesChange={handleNotesChange}
           />
 
           <footer>

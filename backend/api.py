@@ -55,7 +55,19 @@ def _apply_status(company: dict) -> dict:
         **company,
         "status": entry.get("status", DEFAULT_STATUS),
         "status_updated_at": entry.get("updated_at"),
+        "notes": entry.get("notes", ""),
     }
+
+
+def _update_tracking(company_key: str, **fields) -> dict:
+    """Merge the given fields into a company's tracking entry (status and/or
+    notes), stamp the update time, persist, and return the merged company."""
+    entry = dict(_statuses.get(company_key, {}))
+    entry.update(fields)
+    entry["updated_at"] = datetime.now(timezone.utc).isoformat()
+    _statuses[company_key] = entry
+    _save_statuses()
+    return _apply_status(_companies_by_key[company_key])
 
 
 @asynccontextmanager
@@ -88,6 +100,10 @@ class StatusUpdateRequest(BaseModel):
     status: str
 
 
+class NotesUpdateRequest(BaseModel):
+    notes: str
+
+
 @app.get("/api/status-options")
 def get_status_options():
     return STATUS_OPTIONS
@@ -114,13 +130,14 @@ def update_status(company_key: str, req: StatusUpdateRequest):
         raise HTTPException(
             status_code=422, detail=f"status must be one of {STATUS_OPTIONS}, got {req.status!r}"
         )
+    return _update_tracking(company_key, status=req.status)
 
-    _statuses[company_key] = {
-        "status": req.status,
-        "updated_at": datetime.now(timezone.utc).isoformat(),
-    }
-    _save_statuses()
-    return _apply_status(_companies_by_key[company_key])
+
+@app.patch("/api/companies/{company_key}/notes")
+def update_notes(company_key: str, req: NotesUpdateRequest):
+    if company_key not in _companies_by_key:
+        raise HTTPException(status_code=404, detail=f"No company with key {company_key!r}")
+    return _update_tracking(company_key, notes=req.notes)
 
 
 @app.post("/api/companies/{company_key}/report")

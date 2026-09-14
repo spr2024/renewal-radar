@@ -59,7 +59,7 @@ export default function PerksModal({ filing, onClose }) {
               />
             </div>
             <button className="run-btn" onClick={() => setSent(true)}>
-              Send ${amount} Amazon Gift Card
+              Send ${amount} Gift Card
             </button>
             <p className="demo-disclaimer">Demo only &mdash; no real gift card is issued or charged.</p>
           </>
@@ -67,7 +67,7 @@ export default function PerksModal({ filing, onClose }) {
           <div className="perk-success">
             <div className="perk-success-icon">✓</div>
             <p>
-              ${amount} Amazon Gift Card sent{recipient ? ` to ${recipient}` : ""} for{" "}
+              ${amount} Gift Card sent{recipient ? ` to ${recipient}` : ""} for{" "}
               {filing.sponsor_name}
             </p>
             <p className="demo-disclaimer">Demo only &mdash; no real gift card is issued or charged.</p>

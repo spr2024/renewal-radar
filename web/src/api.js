@@ -25,6 +25,19 @@ export async function updateCompanyStatus(companyKey, status) {
   return res.json();
 }
 
+export async function updateCompanyNotes(companyKey, notes) {
+  const res = await fetch(`${API_BASE}/api/companies/${companyKey}/notes`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ notes }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.detail || `Notes update failed (${res.status})`);
+  }
+  return res.json();
+}
+
 export async function runCallerReport(companyKey) {
   const res = await fetch(`${API_BASE}/api/companies/${companyKey}/report`, {
     method: "POST",
