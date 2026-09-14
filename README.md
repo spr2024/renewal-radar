@@ -7,7 +7,7 @@ coverage gaps versus peers, and a cold-call opener, grounded entirely in the fil
 data.
 
 Built in a single hackathon session. Backend is Python/FastAPI, frontend is
-React/Vite, and the call-prep reports are generated live by the Anthropic API —
+React/Vite, and the call-prep reports are generated live by the Anthropic API
 nothing in the report content is templated or hand-written.
 
 ## What it does
