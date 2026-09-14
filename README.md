@@ -2,7 +2,7 @@
 
 A prospecting tool for employee benefits brokers: it turns public DOL Form 5500 /
 Schedule A filings into a directory of renewal opportunities, then uses Claude to
-generate a call-prep briefing for each one — a reason to call, the renewal timing,
+generate a call-prep briefing for each one a reason to call, the renewal timing,
 coverage gaps versus peers, and a cold-call opener, grounded entirely in the filed
 data.
 
