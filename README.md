@@ -2,13 +2,13 @@
 
 A prospecting tool for employee benefits brokers: it turns public DOL Form 5500 /
 Schedule A filings into a directory of renewal opportunities, then uses Claude to
-generate a call-prep briefing for each one a reason to call, the renewal timing,
+generate a call-prep briefing for each one: a reason to call, the renewal timing,
 coverage gaps versus peers, and a cold-call opener, grounded entirely in the filed
 data.
 
 Built in a single hackathon session. Backend is Python/FastAPI, frontend is
-React/Vite, and the call-prep reports are generated live by the Anthropic API
-nothing in the report content is templated or hand-written.
+React/Vite, and the call-prep reports are generated live by the Anthropic API.
+Nothing in the report content is templated or hand-written.
 
 ## What it does
 
